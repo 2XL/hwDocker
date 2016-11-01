@@ -1,0 +1,1 @@
+example of how to setup private docker registry can be found in chapter 5, pages [77-89] 

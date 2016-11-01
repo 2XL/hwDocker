@@ -82,6 +82,28 @@ CMD [command] # command after image start
 
 ```
 
+
+#### Docker Container Networking
+
+```bash
+
+# lookup host docker network interface private ip
+ifconfig docker0 # 172.17.0.1 [172.17.x.x]
+
+# lookup container instance private ip
+sudo docker run -i -t ubuntu /bin/bash # && ifconfig
+
+# if ifconfig not installed:
+apt-get update
+apt-get install net-tools
+ifconfig # the container has @ 172.17.0.2
+
+# lookup container instance private ip, when the container use -d <detached mode>
+docker inspect --format='{{.NetworkSettings.IPAddress}}' <container-id>
+
+
+```
+
 #### Task Lists
 
 
@@ -121,9 +143,11 @@ CMD [command] # command after image start
 
     * AIX: Advanced Interactive Executive
     * AUFS: Another Union File System
+    * DNAT: Destination NAT
     * IANA: Internet Assigned Numbers Authority  # docker default 2375
     * FreeBSD: Free Berkley Software Distribution
     * LXC: Linux Containers
+    * NAT: Network Address Translation
     * VEs: Virtual Environments
     * VPSs: Virtual Private Servers
     * WPARs: Workload Partitions

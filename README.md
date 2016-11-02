@@ -2,7 +2,7 @@
 Optimize the power of docker to run your applications quickly and easily
 
 
-##### Install:
+##### Install Docker:
 
 ```{r, engine='shell', count_lines}
 # install docker
@@ -15,6 +15,21 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869
 echo "install docker..."
 sudo apt-get install -y lxc-docker
 # current release 1.12.1
+
+```
+
+
+##### Install Docker-Compose:
+
+```
+
+# from repo
+sudo sh -c 'wget -qO- https://github.com/docker/compose/releases/download/<VERSION>/ docker-compose-'uname -s'-'uname -m' > /usr/local/bin/docker-compose; chmod +x /usr/local/bin/docker-compose'
+
+# with python pip
+sudo pip install -U docker-compose
+
+sudo docker-compose --version
 
 ```
 
@@ -104,11 +119,74 @@ docker inspect --format='{{.NetworkSettings.IPAddress}}' <container-id>
 
 ```
 
+#### Docker Compose 
+
+```bash
+
+docker-compose -f <filepath|default:docker-compose.yml> -p <projectname|default:dirname>
+
+### docker-compose cli 
+build:  This builds or rebuilds services
+kill:   This kills containers
+logs:   This displays the output from the containers
+port:   This prints the public port for a port binding
+ps:     This lists the containers
+pull:   This pulls the service images
+rm:     This removes the stopped containers
+run:    This runs a one-off command
+scale:  This sets a number of containers for a service
+start:  This starts services
+stop:   This stops services
+up:     This creates and starts containers
+
+
+### docker-compose tags format
+<service>: name of the service
+    key:value, ...  # compulsory either image or build per service.
+    
+### docker-compose keys
+image: <tag>|<imageID>           
+build: <path-to-Dockerfile>
+command: <cmd> override default cmd
+links: link containers in another serivce <service-name>
+external_links: link with external service or means ...
+ports: exposes ports >> <HOST_port>:<CONTAINER_port>
+expose: exposes ports >> <port>
+volumes: mount host paths as volumes <path>
+volumes_from: mount all volumes form another container <service-name>
+environment: <k=v>  either array or dict
+env_file: adds env_vals to a file <file_path>
+extends: extends to another service.
+net: networking mode, same effect as --net 
+pid: enables PID space sharing between host and containers
+dns: set custom dns servers
+cap_add: add capability to containers
+cap_drop: disable capability from containers
+dns_search: custom dns search servers
+working_dir: change default working dir inner container
+entrypoint: overrides the default entrypoint
+user: set the default user
+hostname: set container's host name
+domainname: set domain name
+mem_limit: this limits ram mem
+priviledged: gives extended priviledges
+restart: this sets the restart policy of the container
+stdin_open: enables the standard input facility
+tty: enables text based control such as terminal
+cpu_shares: set cpu shares (relative weight) %
+
+
+
+
+```
+
+
+
 #### Task Lists
 
 
  - [x] task 1: docker hello world
- - [ ] task 2: docker docker-compose.yml 
+ - [x] task 2: docker docker-compose.yml 
  - [ ] task x
  - [x] John Gay says infinity is a number :+1: .
 
@@ -139,6 +217,13 @@ docker inspect --format='{{.NetworkSettings.IPAddress}}' <container-id>
     
     * Docker Hub Registry: docker pull subcommand is programmed to lookup by default images available in the public docker registry (index.docker.io)
     
+    * Service Computing (Orchestration): manner to produce and sustain highly robust and resilient services.
+    
+    * Microservice Architecture: is an architectural concept that aims to decouple a software solution by decomposing its functionality into a pool of discrete services.
+       
+    
+    
+    
 * Acronims (order by name asc):
 
     * AIX: Advanced Interactive Executive
@@ -148,7 +233,8 @@ docker inspect --format='{{.NetworkSettings.IPAddress}}' <container-id>
     * FreeBSD: Free Berkley Software Distribution
     * LXC: Linux Containers
     * NAT: Network Address Translation
+    * SC: Service Computing
     * VEs: Virtual Environments
     * VPSs: Virtual Private Servers
     * WPARs: Workload Partitions
-    * 
+    * YAML: YAML Ain't Markup Language

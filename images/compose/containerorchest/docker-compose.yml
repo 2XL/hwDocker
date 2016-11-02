@@ -1,0 +1,16 @@
+# Orchest nodejs + redis
+
+
+web:
+  build: .
+  command: node /myapp/example.js # run this command after launch during runtime.
+  link: # this container is linked to redis container, redis know where web is.
+   - redis
+  ports: # this container port 80 is mapped to docker host port 8080
+   - 8080:80 # <hostport>:<containerport>
+
+redis:
+  image: redis:latest
+
+
+

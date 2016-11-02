@@ -19,9 +19,20 @@ python -m unittest <test_hitcount|test_script>
 * virtualenv was the previous approach to face this issues.
 * docker goes one step further, isolating from os packaging level, the python toolchain and its runtime environment.
 
+** this approach is daunting job, require to built image over and over again, to run the tests.
+
+...
+
+** alternative approach to the previous, the Docker container is built with a runtime environment, the dev directory (test code) is mounted as a volume, and the test is performed inside the container.
+
+1. same as previous but now we customize the python container with the required libraries until the test pass,
+2. once the test pass, we perform a "sudo docker commit <instance_id> <newinstancename>"
+3. from now on, we can use the new image to launch new containers for our TDD
+
+### Integrating the Docker testing process into Jenkins (page 162)
 
 
-### Integrating the Docker testing process into Jenkins
+
 
 
 
